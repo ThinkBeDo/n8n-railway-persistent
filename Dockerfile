@@ -43,5 +43,5 @@ ENV EXECUTIONS_MODE=regular
 # Enable metrics for health checks
 ENV N8N_METRICS=true
 
-# Start n8n
-ENTRYPOINT ["n8n"]
+# CRITICAL FIX: Start n8n with explicit 'start' command
+ENTRYPOINT ["n8n", "start"]
