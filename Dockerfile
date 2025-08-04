@@ -9,8 +9,7 @@ RUN mkdir -p /home/node/.n8n && \
     chown -R node:node /home/node/.n8n && \
     chmod -R 755 /home/node/.n8n
 
-# Create volume mount point
-VOLUME ["/home/node/.n8n"]
+# Volume will be handled by Railway volumes - removed VOLUME keyword
 
 # Install postgresql client for backups
 RUN apk add --no-cache postgresql-client
@@ -27,7 +26,7 @@ EXPOSE 8080
 # Set n8n to listen on all interfaces and use port 8080
 ENV N8N_HOST=0.0.0.0
 ENV N8N_PORT=8080
-ENV N8N_PROTOCOL=http
+ENV N8N_PROTOCOL=https
 ENV WEBHOOK_URL=https://$RAILWAY_PUBLIC_DOMAIN
 
 # Enable basic auth by default (users should override these)
