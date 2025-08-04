@@ -11,8 +11,9 @@ RUN mkdir -p /home/node/.n8n && \
 
 # Volume will be handled by Railway volumes - removed VOLUME keyword
 
-# Install postgresql client for backups
-RUN apk add --no-cache postgresql-client
+# Install postgresql client for backups and force cache invalidation
+RUN apk add --no-cache postgresql-client && \
+    echo "Docker rebuild: $(date)" > /tmp/build-timestamp
 
 # Switch back to node user
 USER node
