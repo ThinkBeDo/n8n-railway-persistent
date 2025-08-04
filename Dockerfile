@@ -1,0 +1,45 @@
+# Use official n8n image
+FROM n8nio/n8n:latest
+
+# Switch to root to set up permissions
+USER root
+
+# Create n8n data directory with proper permissions
+RUN mkdir -p /home/node/.n8n && \
+    chown -R node:node /home/node/.n8n && \
+    chmod -R 755 /home/node/.n8n
+
+# Create volume mount point
+VOLUME ["/home/node/.n8n"]
+
+# Install postgresql client for backups
+RUN apk add --no-cache postgresql-client
+
+# Switch back to node user
+USER node
+
+# Set working directory
+WORKDIR /home/node
+
+# Expose Railway's preferred port
+EXPOSE 8080
+
+# Set n8n to listen on all interfaces and use port 8080
+ENV N8N_HOST=0.0.0.0
+ENV N8N_PORT=8080
+ENV N8N_PROTOCOL=http
+ENV WEBHOOK_URL=https://$RAILWAY_PUBLIC_DOMAIN
+
+# Enable basic auth by default (users should override these)
+ENV N8N_BASIC_AUTH_ACTIVE=true
+ENV N8N_BASIC_AUTH_USER=admin
+ENV N8N_BASIC_AUTH_PASSWORD=changeme
+
+# Set execution mode to regular (not queue)
+ENV EXECUTIONS_MODE=regular
+
+# Enable metrics for health checks
+ENV N8N_METRICS=true
+
+# Start n8n
+ENTRYPOINT ["n8n"]
