@@ -44,5 +44,5 @@ ENV EXECUTIONS_MODE=regular
 # Enable metrics for health checks
 ENV N8N_METRICS=true
 
-# CRITICAL FIX: Start n8n with explicit 'start' command
-ENTRYPOINT ["n8n", "start"]
+# HYPOTHESIS TEST: Try no arguments (let docker-entrypoint.sh handle it)
+ENTRYPOINT ["n8n"]
