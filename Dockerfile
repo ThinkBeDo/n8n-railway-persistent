@@ -20,14 +20,17 @@ USER node
 # Set working directory
 WORKDIR /home/node
 
-# Expose Railway's preferred port
-EXPOSE 8080
+# Expose the port (Railway will inject $PORT dynamically)
+EXPOSE $PORT
 
-# Set n8n to listen on all interfaces and use port 8080
+# Set n8n to listen on all interfaces and use Railway's PORT
 ENV N8N_HOST=0.0.0.0
-ENV N8N_PORT=8080
+ENV N8N_PORT=$PORT
+ENV N8N_LISTEN_ADDRESS=::
 ENV N8N_PROTOCOL=https
-ENV WEBHOOK_URL=https://$RAILWAY_PUBLIC_DOMAIN
+
+# Set fallback port for local development
+ENV PORT=5678
 
 # Enable basic auth by default (users should override these)
 ENV N8N_BASIC_AUTH_ACTIVE=true
