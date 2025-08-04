@@ -44,5 +44,5 @@ ENV EXECUTIONS_MODE=regular
 # Enable metrics for health checks
 ENV N8N_METRICS=true
 
-# REVERT TO ORIGINAL: Use n8n's default behavior without explicit "start"
-ENTRYPOINT ["n8n"]
+# Use CMD instead of ENTRYPOINT to allow Railway to override if needed
+CMD ["n8n"]
