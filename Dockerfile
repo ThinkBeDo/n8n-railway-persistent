@@ -1,5 +1,5 @@
 # Use official n8n image
-FROM n8nio/n8n:latest
+FROM n8nio/n8n:2.17.7
 
 # Switch to root to set up permissions
 USER root
