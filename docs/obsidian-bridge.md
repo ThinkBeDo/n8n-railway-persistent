@@ -1,7 +1,7 @@
 # Obsidian Bridge
 
 ## Vault
-path: /Users/tylerlafleur/Library/Mobile Documents/iCloud~md~obsidian/Documents/HP3
+path: /Users/tylerlafleur/HP3
 
 ## Client
 name: Stark Health
